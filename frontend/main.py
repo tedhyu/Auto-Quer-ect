@@ -15,6 +15,12 @@ nltk.download('words')
 
 
 def html_to_text(page):
+    """Converts html page to text
+    Args:
+        page:  html
+    Returns:
+        soup.get_text(" ", strip=True):  string
+    """ 
     try:
         encoding = EncodingDetector.find_declared_encoding(page, is_html=True)
         soup = BeautifulSoup(page, "lxml", from_encoding=encoding)
@@ -25,6 +31,13 @@ def html_to_text(page):
         return ""
 
 def fetch_process_warc_records(rows):
+    """Retrieves document from S3 Data Lake.  The argument is a row of warc_filename, warc_record_offset, warc_record_length.  
+       The html to be retrieved are pulled from the file using the offset and length.  
+    Args:
+        rows: list[string, int, int]
+    Returns:
+        fetch_process_warc_records
+    """     
     s3client = boto3.client('s3')
     for row in rows:
         warc_path = row['warc_filename']
