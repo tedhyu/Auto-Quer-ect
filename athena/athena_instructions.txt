@@ -2,14 +2,13 @@ Below is the athena statement to search common crawl for websites whose url cont
 The word "news" is recommended to be included in the query so that shopping sites are excluded.
 
 
-SELECT  url, warc_filename, warc_record_offset, warc_record_length
+SELECT  warc_filename, warc_record_offset, warc_record_length
 FROM "ccindex"."ccindex"
 WHERE crawl = 'CC-MAIN-2020-10'
   AND subset = 'warc'
   AND content_languages = 'eng'
   and position('nba' in url) != 0
   and position('news' in url) != 0
-LIMIT 1000
 
 The output has four columns:  Technically, the url is not needed, but is included for reference purposes.
 In the the first website that is crawled:

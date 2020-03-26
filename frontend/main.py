@@ -27,7 +27,6 @@ def html_to_text(page):
 def fetch_process_warc_records(rows):
     s3client = boto3.client('s3')
     for row in rows:
-        url = row['url']
         warc_path = row['warc_filename']
         offset = int(row['warc_record_offset'])
         length = int(row['warc_record_length'])
@@ -43,8 +42,8 @@ def fetch_process_warc_records(rows):
 
 
 session = SparkSession.builder.getOrCreate()
-sqldf = session.read.format("csv").option("header", True).option("inferSchema", True).load("s3://athena-tedyu/bball/2020/03/24/99b65ef8-d73f-444e-8685-dd1d1261dd46.csv")
-warc_recs = sqldf.select("url", "warc_filename", "warc_record_offset", "warc_record_length").rdd
+sqldf = session.read.format("csv").option("header", True).option("inferSchema", True).load("s3://athena-tedyu/Unsaved/2020/03/26/14596464-5556-493f-8f8e-e1378e2ef9b1.csv")
+warc_recs = sqldf.select("warc_filename", "warc_record_offset", "warc_record_length").rdd
 
 word_pattern = re.compile('\w+', re.UNICODE)
 word_counts = warc_recs.mapPartitions(fetch_process_warc_records).filter((lambda a: re.search(r'^[A-Z][a-z]', a[0]))).reduceByKey(lambda a, b: a + b).sortBy(lambda a: a[1], ascending=False)
