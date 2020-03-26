@@ -13,13 +13,14 @@ Requirements:  Amazon Web Services
 
 1)  S3:  Set up and S3 bucket.  In this case:  s3://athena-tedyu/
 2)  Athena:  Open Athena on AWS.  Follow the instructions to set up "Running SQL Queries with Athena" here:  https://commoncrawl.org/2018/03/index-to-warc-files-and-urls-in-columnar-format/
-3)  Run Athena with the example in the 
-5)  Input CSV File:  The event file must contain the headers:  "Email", "Last Name", "First Name".  If there are multiple columns containing these words, priority will be given to the headers "Buyer Email", "Buyer Last Name", and "Buyer First Name".
-6)  BigQuery:  Set up Three BigQuery Tables:
-<br>a)  customertable.salesforce - This is a BigQuery table imported from Salesforce.  It has one column needed which is Email_address.
-<br>b)  customertable.attendees - Email(String), First_name(string), Last_name(string), Guests(integer), Is_salesforce(boolean), Datestamp(timestamp), Eventname(string), Venue(String), Eventdate(string)
-<br>c)  customertable.events - Eventname(string), Venue(string), Eventdate(string), Datestamp(timestamp), Attendance(integer)
-<hr/>
+3)  Run Athena with the example in https://github.com/tedhyu/Auto-Querect/blob/master/athena/athena_instructions.txt
+4)  Start EMR in Amazon with Spark and ssh in.
+5)  Add the following to ~/.bashrc and source ~/.bashrc
+export SPARK_HOME=/usr/lib/spark
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH  
+export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
+6)  Install the following on EMR with "sudo pip install":  warcio, boto3, bs4, nltk 
+7)  Execute main.py in master node.
 
 ## Introduction
 This app establishes a connection between venue and salesforce data, which were previously not linked.  It enters into two new tables:  attendees and events.
