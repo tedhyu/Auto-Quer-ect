@@ -3,7 +3,7 @@
 Personalized Auto-Correct for Mobile Devices
 
 Slides:  https://docs.google.com/presentation/d/15lw0YoCaAgi6aS3IDdqB2xxnaMgcg-fHXuMsZ4Jo9qw
-<br>Video:  https://www.youtube.com/watch?v=HJ6JcFWGJCs
+<br>Video:  https://www.youtube.com/watch?v=8GcO-SUtur8&t=5s
 
 <hr/>
 

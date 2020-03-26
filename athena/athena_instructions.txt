@@ -9,6 +9,7 @@ WHERE crawl = 'CC-MAIN-2020-10'
   AND content_languages = 'eng'
   and position('nba' in url) != 0
   and position('news' in url) != 0
+LIMIT 1000
 
 The output has four columns:  Technically, the url is not needed, but is included for reference purposes.
 In the the first website that is crawled:
