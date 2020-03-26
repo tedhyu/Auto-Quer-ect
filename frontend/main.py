@@ -51,22 +51,29 @@ def fetch_process_warc_records(rows):
             text = html_to_text(page)
             words = map(lambda w: w, word_pattern.findall(text))
             for word in words:
-                yield word, 1
+                yield word, 1   #create key as word and index as 1
 
 
-session = SparkSession.builder.getOrCreate()
-sqldf = session.read.format("csv").option("header", True).option("inferSchema", True).load("s3://athena-tedyu/Unsaved/2020/03/26/14596464-5556-493f-8f8e-e1378e2ef9b1.csv")
+session = SparkSession.builder.getOrCreate()  #Create Spark Session
+
+#Read csv from athena output.  Take random 1000 rows
+sqldf = session.read.format("csv").option("header", True).option("inferSchema", True).load("s3://athena-tedyu/Unsaved/2020/03/26/14596464-5556-493f-8f8e-e1378e2ef9b1.csv").takesample(False,1000)
+
+#Create rdd of the 1000 rows selected
 warc_recs = sqldf.select("warc_filename", "warc_record_offset", "warc_record_length").rdd
 
+#convert to unicode
 word_pattern = re.compile('\w+', re.UNICODE)
-word_counts = warc_recs.mapPartitions(fetch_process_warc_records).filter((lambda a: re.search(r'^[A-Z][a-z]', a[0]))).reduceByKey(lambda a, b: a + b).sortBy(lambda a: a[1], ascending=False)
+
+#mapPartition gets a list of words and 1's.  Filter removes all words that don't start with capital.  reduceByKey combines all a's and gets word count.  sortBy sorts by largest count to smallest. 
+word_counts = warc_recs.mapPartitions(fetch_process_warc_records).filter((lambda a: re.search(r'^[A-Z]', a[0]))).reduceByKey(lambda a, b: a + b).sortBy(lambda a: a[1], ascending=False)
 
 list= word_counts.take(1000)
 new_list=[]
 for i in list:
-    if i[0].lower() not in nltk.corpus.wordnet.words():
-        lower_case = Lem.lemmatize(i[0].lower())
-        if lower_case not in nltk.corpus.words.words():
-            new_list.append(i)
+    if i[0].lower() not in nltk.corpus.wordnet.words():  #filters by wordnet library
+        lower_case = Lem.lemmatize(i[0].lower())         #converts any plurals to singular
+        if lower_case not in nltk.corpus.words.words():  #filter by words library
+            new_list.append(i)                           #adds to list.
 
 print(new_list)
