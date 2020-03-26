@@ -1,0 +1,48 @@
+Below is the athena statement to search common crawl for websites whose url contain the words "NBA" and "news". 
+The word "news" is recommended to be included in the query so that shopping sites are excluded.
+
+
+SELECT  url, warc_filename, warc_record_offset, warc_record_length
+FROM "ccindex"."ccindex"
+WHERE crawl = 'CC-MAIN-2020-10'
+  AND subset = 'warc'
+  AND content_languages = 'eng'
+  and position('nba' in url) != 0
+  and position('news' in url) != 0
+LIMIT 1000
+
+The output has four columns:  Technically, the url is not needed, but is included for reference purposes.
+In the the first website that is crawled:
+http://e4c.com/Jan19feed/10_games_put_NBA_star_back_into_MVP_conversation_news.htm   <= it is a match because NBA and news are in the url.
+The s3 location of the website is in the file:  s3://commoncrawl/crawl-data/CC-MAIN-2019-04/segments/1547584431529.98/warc/CC-MAIN-20190123234228-20190124020228-00139.warc.gz
+This file contains many websites, but to reference it, the warc_record_offset: 61860482 and warc_record_length: 1766 are used.
+
+In the next step, Spark will open the file at the 61860482 line and pull the next 1766 lines.
+
+Sample output:
+url,warc_filename,warc_record_offset,warc_record_length
+http://e4c.com/Jan19feed/10_games_put_NBA_star_back_into_MVP_conversation_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547584431529.98/warc/CC-MAIN-20190123234228-20190124020228-00139.warc.gz,61860482,1766
+http://e4c.com/Jan19feed/NBA_player_carted_off_after_scary_head_injury_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583700012.70/warc/CC-MAIN-20190120042010-20190120064010-00264.warc.gz,81816708,1774
+http://e4c.com/Jan19feed/NBA_player_fears_he_could_be_assassinated_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583657151.48/warc/CC-MAIN-20190116093643-20190116115643-00053.warc.gz,72495912,1855
+http://e4c.com/Jan19feed/NBA_player_found_out_he_was_traded_on_social_media_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547584445118.99/warc/CC-MAIN-20190124014810-20190124040810-00393.warc.gz,64677961,1795
+http://e4c.com/Jan19feed/NBA_player_skips_London_trip_for_fears_of_assassination_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583831770.96/warc/CC-MAIN-20190122074945-20190122100945-00492.warc.gz,69541484,1795
+http://e4c.com/Jan19feed/NBA_player_skips_trip_for_fears_of_assassination_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583658981.19/warc/CC-MAIN-20190117123059-20190117145059-00413.warc.gz,65296757,1784
+http://e4c.com/Jan19feed/NBA_star_calls_his_team_too_soft_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583659056.44/warc/CC-MAIN-20190117163938-20190117185938-00629.warc.gz,69083834,1770
+http://e4c.com/Jan19feed/NBA_star_scores_43_points_but_only_dribbles_4_times__news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583657151.48/warc/CC-MAIN-20190116093643-20190116115643-00396.warc.gz,71079010,1754
+http://e4c.com/Jan19feed/NBA_star_snubs_teams_owner_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583658844.27/warc/CC-MAIN-20190117062012-20190117084012-00063.warc.gz,62108182,1757
+http://e4c.com/Jan19feed/NBA_star_turns_conspiracy_theory_into_a_good_cause_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583722261.60/warc/CC-MAIN-20190120143527-20190120165527-00164.warc.gz,64073694,1787
+http://e4c.com/Jan19feed/NBA_stars_shoes_to_be_auctioned_off_to_benefit_STEM_programs_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583660818.25/warc/CC-MAIN-20190118213433-20190118235433-00565.warc.gz,65412714,1794
+http://e4c.com/Jan19feed/NBA_team_fires_coach_right_after_beating_Lakers_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583658981.19/warc/CC-MAIN-20190117123059-20190117145059-00176.warc.gz,64616000,1777
+http://e4c.com/Jan19feed/NBAer_carted_off_after_scary_head_injury_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583660818.25/warc/CC-MAIN-20190118213433-20190118235433-00249.warc.gz,73506509,1761
+http://e4c.com/Jan19feed/NBAer_fears_for_life_if_he_played_game_in_London_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583884996.76/warc/CC-MAIN-20190123023710-20190123045710-00021.warc.gz,65898791,1801
+http://e4c.com/Jan19feed/Report_94M_NBAer_to_leave_team_indefinitely_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583722261.60/warc/CC-MAIN-20190120143527-20190120165527-00571.warc.gz,72573551,1770
+https://www.houstonchronicle.com/news/article/Former-NBA-player-leaps-into-new-game-as-an-10416278.php,crawl-data/CC-MAIN-2019-04/segments/1547584332824.92/warc/CC-MAIN-20190123130602-20190123152602-00620.warc.gz,810409737,21540
+http://e4c.com/Jan19feed/Surprise_NBA_teams_that_will_make_playoffs_news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583658844.27/warc/CC-MAIN-20190117062012-20190117084012-00055.warc.gz,68569351,1711
+http://e4c.com/Jan19feed/Young_playerkiller_may_ruin_NBA_team__news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583884996.76/warc/CC-MAIN-20190123023710-20190123045710-00145.warc.gz,63297813,1768
+http://e4c.com/Jan19feed/Youngplayer_killer_may_ruin_NBA_team__news.htm,crawl-data/CC-MAIN-2019-04/segments/1547583792338.50/warc/CC-MAIN-20190121111139-20190121133139-00559.warc.gz,69448795,1763
+https://www.houstonchronicle.com/news/houston-texas/houston/article/Son-of-NBA-legend-Moses-Malone-testifies-he-was-12405421.php,crawl-data/CC-MAIN-2019-04/segments/1547583659944.3/warc/CC-MAIN-20190118070121-20190118092121-00527.warc.gz,813803080,18486
+http://www.adriatic-challenge.com/Login?returnurl=%2Fother%2Fnews%2FID%2F133%2F10th-ROUND-PALAGRUZA-CANNONBALL-RPC-2017,crawl-data/CC-MAIN-2019-04/segments/1547583831770.96/warc/CC-MAIN-20190122074945-20190122100945-00601.warc.gz,248229255,7776
+https://www.granitefallsnews.com/x50632068/Around-the-NBA-Cavs-mixing-things-up-against-Detroit,crawl-data/CC-MAIN-2019-04/segments/1547583857913.57/warc/CC-MAIN-20190122140606-20190122162606-00479.warc.gz,811199913,16511
+https://www.kitplus.com/news/NBA_and_SENSIO_to_feature_first_NBA_All-Star_in_3D_for_international_fans/1791.html,crawl-data/CC-MAIN-2019-04/segments/1547583659063.33/warc/CC-MAIN-20190117184304-20190117210304-00345.warc.gz,865190197,64738
+https://www.kitplus.com/news/XL_Video_Get_Their_Game_On_for_NBA__Pre-Season_Meet_in_Manchester/8137.html,crawl-data/CC-MAIN-2019-04/segments/1547583705091.62/warc/CC-MAIN-20190120082608-20190120104608-00613.warc.gz,836923635,71840
+https://newsexpressngr.com/news/36321-Corruption-Bayelsa-Govt-NBA-decry-continued-closure-of-Federal-High-Court-and-Industrial-Court,crawl-data/CC-MAIN-2019-04/segments/1547583
