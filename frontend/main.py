@@ -20,7 +20,7 @@ def html_to_text(page):
         page:  html
     Returns:
         soup.get_text(" ", strip=True):  string
-    """ 
+    """
     try:
         encoding = EncodingDetector.find_declared_encoding(page, is_html=True)
         soup = BeautifulSoup(page, "lxml", from_encoding=encoding)
@@ -37,7 +37,7 @@ def fetch_process_warc_records(rows):
         rows: list[string, int, int]
     Returns:
         fetch_process_warc_records
-    """     
+    """
     s3client = boto3.client('s3')
     for row in rows:
         warc_path = row['warc_filename']
@@ -56,8 +56,8 @@ def fetch_process_warc_records(rows):
 
 session = SparkSession.builder.getOrCreate()  #Create Spark Session
 
-#Read csv from athena output.  Take random 1000 rows
-sqldf = session.read.format("csv").option("header", True).option("inferSchema", True).load("s3://athena-tedyu/Unsaved/2020/03/26/14596464-5556-493f-8f8e-e1378e2ef9b1.csv").takesample(False,1000)
+#Read csv from athena output.  Take rows
+sqldf = session.read.format("csv").option("header", True).option("inferSchema", True).load("s3://athena-tedyu/Unsaved/2020/03/26/14596464-5556-493f-8f8e-e1378e2ef9b1.csv")
 
 #Create rdd of the 1000 rows selected
 warc_recs = sqldf.select("warc_filename", "warc_record_offset", "warc_record_length").rdd
@@ -66,7 +66,7 @@ warc_recs = sqldf.select("warc_filename", "warc_record_offset", "warc_record_len
 word_pattern = re.compile('\w+', re.UNICODE)
 
 #mapPartition gets a list of words and 1's.  Filter removes all words that don't start with capital.  reduceByKey combines all a's and gets word count.  sortBy sorts by largest count to smallest. 
-word_counts = warc_recs.mapPartitions(fetch_process_warc_records).filter((lambda a: re.search(r'^[A-Z]', a[0]))).reduceByKey(lambda a, b: a + b).sortBy(lambda a: a[1], ascending=False)
+word_counts = warc_recs.mapPartitions(fetch_process_warc_records).filter((lambda a: re.search(r'^[A-Z][a-z]', a[0]))).reduceByKey(lambda a, b: a + b).sortBy(lambda a: a[1], ascending=False)
 
 list= word_counts.take(1000)
 new_list=[]
