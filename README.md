@@ -36,3 +36,6 @@ Common Crawl Dataset, WARC data:  https://commoncrawl.org/the-data/
 
 ## Engineering challenges
 Common Crawl Dataset contains 50 PetaBytes of data.  The navigation of thie data lake with metadata is a challenge.  Optimizing Spark so that there is efficient scaling with increased cluster size.
+
+## References:
+Very useful poster in getting started with Athena and Common Crawl:  http://netpreserve.org/ga2019/wp-content/uploads/2019/07/IIPCWAC2019-SEBASTIAN_NAGEL-Accessing_WARC_files_via_SQL-poster.pdf
