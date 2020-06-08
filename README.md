@@ -29,7 +29,7 @@ When an individual is found to text a lot of NBA words, the top words in the que
 
 ## Architecture
 Data Pipeline:  
-![Pipeline](https://imgur.com/PIiQevq.png)
+![Pipeline](https://imgur.com/cJtaUBu.png)
 
 ## Dataset
 Common Crawl Dataset, WARC data:  https://commoncrawl.org/the-data/
