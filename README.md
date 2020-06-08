@@ -1,7 +1,7 @@
 # Auto-Querect
 
 Personalized Auto-Correct for Mobile Devices
-Presentation:  https://docs.google.com/presentation/d/15lw0YoCaAgi6aS3IDdqB2xxnaMgcg-fHXuMsZ4Jo9qw/edit?usp=sharing
+<br>Presentation:  https://docs.google.com/presentation/d/15lw0YoCaAgi6aS3IDdqB2xxnaMgcg-fHXuMsZ4Jo9qw/edit?usp=sharing
 
 <hr/>
 
