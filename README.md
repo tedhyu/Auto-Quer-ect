@@ -25,7 +25,7 @@ Basketball fans, are you tired that your phone's auto-correct changes Celtics to
 words related to a subject as queried through the common crawl data lake.  Using very little processing power, the most common words that are not in an English dictionary are found that is 
 related to a subject.  For example when doing a short query for NBA, the app returns the following top 10 words:  Lakers, Celtics, Knicks, Timberwolves, Skyforce, Stats, Grande, Facebook, Antonio, Chris.
 
-When an individual is found to text a lot of NBA words, the top words in the query will be added to their auto-correct dictionary.
+When an individual is found to text a lot of NBA words, the top words in the query will be added to their auto-correct dictionary.  This app updates the auto-correct dictionary so that the newest trending terms, for example new NBA rookies, are constantly updated.
 
 ## Architecture
 Data Pipeline:  
