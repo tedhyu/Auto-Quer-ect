@@ -13,9 +13,9 @@ Requirements:  Amazon Web Services
 2)  Athena:  Open Athena on AWS.  Follow the instructions to set up "Running SQL Queries with Athena" here:  https://commoncrawl.org/2018/03/index-to-warc-files-and-urls-in-columnar-format/
 3)  Run Athena with the example in https://github.com/tedhyu/Auto-Querect/blob/master/athena/athena_instructions.txt
 4)  Start EMR in Amazon with Spark and Hadoop.  SSH in.
-5)  Add the following to ~/.bashrc and source ~/.bashrc:
-export SPARK_HOME=/usr/lib/spark
-export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH  
+5)  Add the following to ~/.bashrc and source ~/.bashrc:<br>
+export SPARK_HOME=/usr/lib/spark<br>
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH  <br>
 export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
 6)  Install the following on EMR with "sudo pip install":  warcio, boto3, bs4, nltk 
 7)  Execute main.py in master node.
