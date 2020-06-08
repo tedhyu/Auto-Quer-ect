@@ -21,7 +21,7 @@ export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
 7)  Execute main.py in master node.
 
 ## Introduction
-This app finds proper nouns of the individual's most often-used subject matter (e.g. NBA, cricket, music) and includes it to an auto-correct dictionary.  The proper nouns are the most often-used
+Basketball fans, are you tired that your phone's auto-correct changes Celtics to Clerics, even though your phone should "know" that you text about the NBA with your friends all the time?  This app finds proper nouns of the individual's most often-used subject matter (e.g. NBA, cricket, music) and includes it to an auto-correct dictionary.  The proper nouns are the most often-used
 words related to a subject as queried through the common crawl data lake.  Using very little processing power, the most common words that are not in an English dictionary are found that is 
 related to a subject.  For example when doing a short query for NBA, the app returns the following top 10 words:  Lakers, Celtics, Knicks, Timberwolves, Skyforce, Stats, Grande, Facebook, Antonio, Chris.
 
