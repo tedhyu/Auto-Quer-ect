@@ -11,7 +11,8 @@ WHERE crawl = 'CC-MAIN-2020-10'
   and position('news' in url) != 0
 LIMIT 1000
 
-The output has four columns:  Technically, the url is not needed, but is included for reference purposes.<br>
+The output has four columns:  Technically, the url is not needed, but is included for reference purposes.
+
 In the the first website that is crawled:
 http://e4c.com/Jan19feed/10_games_put_NBA_star_back_into_MVP_conversation_news.htm   <= it is a match because NBA and news are in the url.
 The s3 location of the website is in the file:  s3://commoncrawl/crawl-data/CC-MAIN-2019-04/segments/1547584431529.98/warc/CC-MAIN-20190123234228-20190124020228-00139.warc.gz
