@@ -12,7 +12,7 @@ Requirements:  Amazon Web Services
 1)  S3:  Set up and S3 bucket.  In this case:  s3://athena-tedyu/
 2)  Athena:  Open Athena on AWS.  Follow the instructions to set up "Running SQL Queries with Athena" here:  https://commoncrawl.org/2018/03/index-to-warc-files-and-urls-in-columnar-format/
 3)  Run Athena with the example in https://github.com/tedhyu/Auto-Querect/blob/master/athena/athena_instructions.txt
-4)  Start EMR in Amazon with Spark and Hadoop.  SSH in.
+4)  Start EMR with 1 ECS instance as Master in Amazon with Spark and Hadoop (Note: this example may only work with 1 ECS instance).  SSH in.
 5)  Add the following to ~/.bashrc and type "source ~/.bashrc"<br>
 export SPARK_HOME=/usr/lib/spark<br>
 export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH  <br>
@@ -21,9 +21,7 @@ export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
 7)  Execute main.py in master node.
 
 ## Introduction
-Basketball fans, are you tired that your phone's auto-correct changes Celtics to Clerics, even though your phone should "know" that you text about the NBA with your friends all the time?  This app finds proper nouns of the individual's most often-used subject matter (e.g. NBA, cricket, music) and includes it to an auto-correct dictionary.  The proper nouns are the most often-used
-words related to a subject as queried through the common crawl data lake.  Using very little processing power, the most common words that are not in an English dictionary are found that is 
-related to a subject.  For example when doing a short query for NBA, the app returns the following top 10 words:  Lakers, Celtics, Knicks, Timberwolves, Skyforce, Stats, Grande, Facebook, Antonio, Chris.
+Basketball fans, are you tired that your phone's auto-correct changes Celtics to Clerics, even though your phone should "know" that you text about the NBA with your friends all the time?  This app finds proper nouns of the individual's most often-used subject matter (e.g. NBA, cricket, music) and includes it to an auto-correct dictionary.  The proper nouns are the most often-used words related to a subject as queried through the common crawl data lake.  Using very little processing power, the most common words that are not in an English dictionary are found that is related to a subject.  For example when doing a short query for NBA, the app returns the following top 10 words:  Lakers, Celtics, Knicks, Timberwolves, Skyforce, Stats, Grande, Facebook, Antonio, Chris.
 
 When an individual is found to text a lot of NBA words, the top words in the query will be added to their auto-correct dictionary.  This app updates the auto-correct dictionary so that the newest trending terms, for example new NBA rookies, are constantly updated.
 
