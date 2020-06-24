@@ -25,7 +25,7 @@ Basketball fans, are you tired that your phone's auto-correct changes Celtics to
 
 When an individual is found to text a lot of NBA words, the top words in the query will be added to their auto-correct dictionary.  This app updates the auto-correct dictionary so that the newest trending terms, for example new NBA rookies, are constantly updated.
 
-The key to making a great auto-correct dictionary is to strike a balance between a short and long dictionary.  A short dictionary will not contain enough words, while the long dictionary will incorrectly change words to little used words that were probably not the author's intention.  The ideal dictionary is a customized one, catering to the writing habit of the author.  Most auto-correct already does this...kind of...  When one forces the auto-correct to accept a word, that word is added to the dictionary.  Yet, the goal of Auto-Querect is to make it that the dictionary already predicts which rare words you are likely to type.
+The key to making a great auto-correct dictionary is to strike a balance between a short and long dictionary.  A short dictionary will not contain enough words, while the long dictionary will incorrectly change words to little used words that were probably not the author's intention.  The ideal dictionary is a customized one, catering to the writing habit of the author.  Most auto-correct already does this...kind of...  When one forces the auto-correct to accept a word, that word is added to the dictionary.  Yet, the goal of Auto-Querect is to make it so that the dictionary "knows" rare words you are likely to type.
 
 ## Architecture
 Data Pipeline:  
